@@ -20,7 +20,7 @@ A few observations on the auth screens include contrast in implementation for sc
 
 I would create a shared component for the layout taking note of all possible passed props then wrap the respective `Login`, `Forgot Password` and `Register` screens with this. For the text input and button, a separate component will be created for each replicating the exact pixel-perfect look in the design and housing the required logic. To handle form validation, the existing hooks (useRegisterErrors & useLoginErrors) could either be optimized or a new useForm hook created to enforce input format by notifying users of the expected format. A perfect way to do this is leveraging the options offered by the [React Native Flash Message](https://www.npmjs.com/package/react-native-flash-message) package, in effect, improve user experience. A typical `useForm` hook will look like the image below: 
 
-![Form Validation Hook]('./useForm-hook.png' "useForm")
+![Form Validation Hook](https://github.com/AregbesolaOJ/my-snapcart-challenge/blob/main/useForm-hook.png?raw=true)
 
 
 ## Exposed URL Parameter
@@ -61,7 +61,7 @@ The destructured `token` here would always be undefined due to the way token is 
 
 To give us a better approach, I would rewrite the `makeApolloClient` function exported to cater for attaching a user's authentication token to the GraphQL execution context. Our updated `apollo.js` will look like below:
 
-![Apollo Client Setup]('./makeApolloClient.png' "MakeApolloClient in apollo.js")
+![Apollo Client Setup](https://github.com/AregbesolaOJ/my-snapcart-challenge/blob/main/makeApolloClient.png?raw=true)
 
 With this, not only can the `fetchSession` code block above and the accompanying useEffect function be moved to the Routes file, our Providers file becomes much leaner with only the necessary code as can be seen in the block below:
 
@@ -131,4 +131,6 @@ In the `AuthStack.js` file, I noticed that the rendered component for the `heade
 A cleaner solution for this in the future is to move this into a separate file housing the component. Which can then be referenced from anywhere.
 
 ### Custom Icons
+Compared icons in the design to ones in the implementation and it seems the actual icons in the design were replaced by the closest vector icons, especially in the bottom tab.
+
 Oftentimes, it is not uncommon for some or most of the icons in the UI design for a project to be custom icons and not among those that come bundled with react-native-vector-icons. This is usually among the first set of things I like to sort in each project before it gets bigger. I take my time in going through the designs, exporting all custom icons in .svg format. Using Icomoon, an app for making custom icon fonts or SVG sprites, I would then generate a font from these custom icons and save the generated lightweight JSON file in the project directory. With this, we can do away with the actual svgs and use our icons anywhere in the application same way we would use a vector icon.
